@@ -64,7 +64,6 @@ class Test {
     if (marksID != null) {
       result.addAll({'marksID': marksID});
     }
-    result.addAll({'testId': testId});
 
     return result;
   }
@@ -79,7 +78,7 @@ class Test {
       endTime: DateTime.fromMillisecondsSinceEpoch(map['endTime']),
       attendanceID: map['attendanceID'],
       marksID: map['marksID'],
-      testId: map['testId'] ?? '',
+      testId: map['\$id'] ?? '',
     );
   }
 

@@ -4,7 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:personal_project/constants/constants.dart';
 import 'package:personal_project/core/core.dart';
-import 'package:personal_project/models/lecutre_model.dart';
+import 'package:personal_project/models/models.dart';
 
 abstract class ILectureRepo {
   Future<List<Document>> getAllLectures();

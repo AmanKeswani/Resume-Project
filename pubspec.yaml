@@ -42,6 +42,8 @@ dependencies:
   google_nav_bar: ^5.0.6
   intl: ^0.18.1
   flutter_rounded_date_picker: ^3.0.4
+  speed_dial_fab: ^2.3.0
+  textfield_tags: ^2.0.2
 
 dev_dependencies:
   flutter_test:

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:personal_project/models/lecutre_model.dart';
-import 'package:personal_project/repositories/lecture_repo.dart';
+import 'package:personal_project/models/models.dart';
+
+import 'package:personal_project/repositories/repos.dart';
+import 'package:personal_project/utils/widgets/snack_bar.dart';
 
 final getTodayLectures = FutureProvider((ref) {
   final lcp = ref.watch(lectureControllerProvider);
@@ -36,7 +38,14 @@ class LectureController {
       std: std,
       lectureID: '',
     ));
-    res.fold((l) => print(l.message), (r) => Navigator.of(context).pop);
+    res.fold(
+      (l) => showSnackBar(context, l.message),
+      (r) {
+        Lecture lecture = Lecture.fromMap(r.data);
+        showSnackBar(context, "Added Lecture : \n ${lecture.toString()}");
+        Navigator.of(context).pop();
+      },
+    );
   }
 
   Future<List<Lecture>> getLectures() async {

@@ -1,8 +1,9 @@
 import 'package:appwrite/models.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:personal_project/features/auth/home/screens/home_screen.dart';
-import 'package:personal_project/repositories/auth_repo.dart';
+import 'package:personal_project/features/home/screens/home_screen.dart';
+import 'package:personal_project/repositories/repos.dart';
+import 'package:personal_project/utils/widgets/widgets.dart';
 
 final authControllerProvider = Provider((ref) {
   final authRepo = ref.watch(authRepoProvider);
@@ -28,13 +29,12 @@ class AuthController {
   }) async {
     username = "$username@example.com";
     final res = await _authRepo.signIn(username: username, password: password);
-    print('reached');
     res.fold(
-      (l) {
-        print("reached 2");
-        print(l.message);
-      },
-      (r) => Navigator.push(context, HomePage.route()),
+      (l) => showSnackBar(context, l.message),
+      (r) => Navigator.push(
+        context,
+        HomePage.route(),
+      ),
     );
   }
 

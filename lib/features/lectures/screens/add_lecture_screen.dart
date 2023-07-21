@@ -3,22 +3,23 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:intl/intl.dart';
+import 'package:personal_project/features/lectures/controllers/lecture_controller.dart';
+import 'package:personal_project/utils/helpers/helpers.dart';
 import 'package:personal_project/utils/widgets/widgets.dart';
 
-class AddLectureTestScreen extends ConsumerStatefulWidget {
-  const AddLectureTestScreen({super.key});
+class AddLectureScreen extends ConsumerStatefulWidget {
+  const AddLectureScreen({super.key});
 
   static route() => MaterialPageRoute(
-        builder: (context) => const AddLectureTestScreen(),
+        builder: (context) => const AddLectureScreen(),
       );
 
   @override
   ConsumerState<ConsumerStatefulWidget> createState() =>
-      _AddLectureTestScreenState();
+      _AddLectureScreenState();
 }
 
-class _AddLectureTestScreenState extends ConsumerState<AddLectureTestScreen> {
+class _AddLectureScreenState extends ConsumerState<AddLectureScreen> {
   final TextEditingController _subject = TextEditingController();
   final TextEditingController _startTime = TextEditingController();
   final TextEditingController _endTime = TextEditingController();
@@ -42,7 +43,7 @@ class _AddLectureTestScreenState extends ConsumerState<AddLectureTestScreen> {
   void initState() {
     _startTime.text = (_start ?? "Select Start Time").toString();
     _endTime.text = (_end ?? "Select End Time").toString();
-    _dateController.text = DateFormat('dd - MMMM - yyyy').format(_date);
+    _dateController.text = DateHelper().formatDateTextMonth(date: _date);
     super.initState();
   }
 
@@ -50,25 +51,25 @@ class _AddLectureTestScreenState extends ConsumerState<AddLectureTestScreen> {
   DateTime? _end;
   DateTime _date = DateTime.now();
 
-  Future<TimeOfDay?> _getTime({
+  void _onLectuerAdd({
     required BuildContext context,
-    required String helpText,
-  }) async =>
-      await showTimePicker(
-        helpText: helpText,
-        context: context,
-        initialEntryMode: TimePickerEntryMode.inputOnly,
-        initialTime: TimeOfDay.now(),
-      );
-
-  Future<DateTime?> _getDate({
-    required BuildContext context,
-  }) async =>
-      await showDatePicker(
+    required String subject,
+    required DateTime startTime,
+    required DateTime endTime,
+    required String facultyUID,
+    required String batch,
+    required String std,
+  }) {
+    ref.watch(lectureControllerProvider).addLecture(
+          subject: subject,
+          startTime: startTime,
+          endTime: endTime,
+          facultyUID: facultyUID,
+          batch: batch,
+          std: std.toString(),
           context: context,
-          initialDate: DateTime.now(),
-          firstDate: DateTime(DateTime.now().year - 1),
-          lastDate: DateTime(DateTime.now().year + 1));
+        );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -80,9 +81,17 @@ class _AddLectureTestScreenState extends ConsumerState<AddLectureTestScreen> {
           InkWell(
             onTap: () {},
             child: IconButton(
-              onPressed: () {},
+              onPressed: () => _onLectuerAdd(
+                batch: _batch.text,
+                context: context,
+                endTime: _end!,
+                facultyUID: _faculty.text,
+                startTime: _start!,
+                std: _std.text.toString(),
+                subject: _subject.text,
+              ),
               icon: Icon(
-                size: 30,
+                size: 20,
                 Icons.done_rounded,
                 color: Color.fromARGB(255, 0, 0, 255),
               ),
@@ -91,7 +100,7 @@ class _AddLectureTestScreenState extends ConsumerState<AddLectureTestScreen> {
         ],
         centerTitle: true,
         title: CustomText(
-          text: "Title",
+          text: "Add Lecture",
           style: customStyle(size: 25),
         ),
       ),
@@ -115,53 +124,36 @@ class _AddLectureTestScreenState extends ConsumerState<AddLectureTestScreen> {
                     child: InkWell(
                       borderRadius: BorderRadius.circular(20),
                       onTap: () async {
-                        final selectedTime = await _getTime(
-                            context: context, helpText: "Select Start Time");
+                        final selected =
+                            await DateHelper().getDate(context: context);
                         setState(() {
-                          if (selectedTime != null) {
-                            _start = DateTime(
-                                _date.year,
-                                _date.month,
-                                _date.day,
-                                selectedTime.hour,
-                                selectedTime.minute);
-                            _startTime.text =
-                                DateFormat('h : mm a').format(_start!);
+                          if (selected != null) {
+                            _date = selected;
+                            _dateController.text =
+                                DateHelper().formatDateTextMonth(date: _date);
+                            _start = DateTime(_date.year, _date.month,
+                                _date.day, _start!.hour, _start!.minute);
+                            _end = DateTime(_date.year, _date.month, _date.day,
+                                _end!.hour, _end!.minute);
                           }
                         });
                       },
                       child: CustomTextFormField(
-                        controller: _startTime,
+                        controller: _dateController,
+                        suffixIcon: Icon(Icons.arrow_drop_down_rounded),
                         enabled: false,
-                        labelText: "Start Time",
+                        labelText: "Lecture Date",
                       ),
                     ),
                   ),
                 ),
                 Expanded(
                   child: Container(
-                    margin: EdgeInsets.only(left: 7.5.w),
-                    child: InkWell(
-                      borderRadius: BorderRadius.circular(20),
-                      onTap: () async {
-                        final selectedTime = await _getTime(
-                            context: context, helpText: "Select End Time");
-                        setState(() {
-                          if (selectedTime != null) {
-                            _end = DateTime(_date.year, _date.month, _date.day,
-                                selectedTime.hour, selectedTime.minute);
-                            _endTime.text =
-                                DateFormat('h : mm a').format(_end!);
-                          }
-                        });
-                      },
+                      margin: EdgeInsets.only(left: 7.5.w),
                       child: CustomTextFormField(
-                        controller: _endTime,
-                        enabled: false,
-                        labelText: "End Time",
-                      ),
-                    ),
-                  ),
+                        controller: _std,
+                        labelText: "Standard",
+                      )),
                 ),
               ],
             ),
@@ -175,31 +167,55 @@ class _AddLectureTestScreenState extends ConsumerState<AddLectureTestScreen> {
                     child: InkWell(
                       borderRadius: BorderRadius.circular(20),
                       onTap: () async {
-                        final selected = await _getDate(context: context);
+                        final selectedTime = await TimeHelper().getTime(
+                            context: context, helpText: "Select Start Time");
                         setState(() {
-                          if (selected != null) {
-                            _date = selected;
-                            _dateController.text =
-                                DateFormat('dd - MMMM -  yyyy').format(_date);
+                          if (selectedTime != null) {
+                            _start = DateTime(
+                                _date.year,
+                                _date.month,
+                                _date.day,
+                                selectedTime.hour,
+                                selectedTime.minute);
+                            _startTime.text =
+                                TimeHelper().formatTime(time: _start!);
                           }
                         });
                       },
                       child: CustomTextFormField(
-                        controller: _dateController,
+                        suffixIcon: Icon(Icons.arrow_drop_down_rounded),
+                        controller: _startTime,
                         enabled: false,
-                        labelText: "Lecture Date",
+                        labelText: "Start Time",
                       ),
                     ),
                   ),
                 ),
                 Expanded(
                   child: Container(
-                      margin: EdgeInsets.only(left: 7.5.w),
+                    margin: EdgeInsets.only(left: 7.5.w),
+                    child: InkWell(
+                      borderRadius: BorderRadius.circular(20),
+                      onTap: () async {
+                        final selectedTime = await TimeHelper().getTime(
+                            context: context, helpText: "Select End Time");
+                        setState(() {
+                          if (selectedTime != null) {
+                            _end = DateTime(_date.year, _date.month, _date.day,
+                                selectedTime.hour, selectedTime.minute);
+                            _endTime.text =
+                                TimeHelper().formatTime(time: _end!);
+                          }
+                        });
+                      },
                       child: CustomTextFormField(
-                        controller: _std,
+                        controller: _endTime,
                         enabled: false,
-                        labelText: "Standard",
-                      )),
+                        suffixIcon: Icon(Icons.arrow_drop_down_rounded),
+                        labelText: "End Time",
+                      ),
+                    ),
+                  ),
                 ),
               ],
             ),

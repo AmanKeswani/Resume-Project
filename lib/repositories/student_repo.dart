@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:personal_project/constants/constants.dart';
 import 'package:personal_project/core/core.dart';
-import 'package:personal_project/models/student_model.dart';
+import 'package:personal_project/models/models.dart';
 
 abstract class IUserRepo {
   FutureEitherVoid saveStudentData(Student student);
@@ -28,7 +28,6 @@ class UserRepo implements IUserRepo {
         documentId: student.studentId,
         data: student.toMap(),
       );
-      print("done");
       return right(null);
     } on AppwriteException catch (e, st) {
       return left(Failure(e.message ?? "some unexpected error", st));

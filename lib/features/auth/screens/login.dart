@@ -7,6 +7,8 @@ import 'package:personal_project/constants/constants.dart';
 import 'package:personal_project/features/auth/controllers/auth_controller.dart';
 import 'package:personal_project/utils/widgets/widgets.dart';
 
+
+
 class LoginPage extends ConsumerStatefulWidget {
   const LoginPage({super.key});
 
@@ -31,8 +33,8 @@ class _LoginPageState extends ConsumerState<LoginPage> {
   void login({required String username, required password}) {
     final authController = ref.watch(authControllerProvider);
     authController.signIn(
-      username: username,
-      password: password,
+      username: username.trim(),
+      password: password.trim(),
       context: context,
     );
   }

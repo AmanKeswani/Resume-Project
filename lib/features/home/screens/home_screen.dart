@@ -3,12 +3,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:intl/intl.dart';
 import 'package:personal_project/constants/constants.dart';
-import 'package:personal_project/features/auth/home/controllers/lecture_controller.dart';
-import 'package:personal_project/features/auth/home/screens/add_lecture_test_screen.dart';
-import 'package:personal_project/features/auth/home/widgets/widgets.dart';
+import 'package:personal_project/features/tests/screens/add_test_screen.dart';
+import 'package:personal_project/features/home/widgets/widgets.dart';
+import 'package:personal_project/features/lectures/controllers/lecture_controller.dart';
+import 'package:personal_project/features/lectures/screens/add_lecture_screen.dart';
+import 'package:personal_project/utils/helpers/helpers.dart';
 import 'package:personal_project/utils/widgets/widgets.dart';
+import 'package:speed_dial_fab/speed_dial_fab.dart';
 
 class HomePage extends ConsumerWidget {
   const HomePage({super.key});
@@ -17,17 +19,36 @@ class HomePage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    void navigateToCreateLectureTest({required BuildContext context}) =>
-        Navigator.of(context).push(AddLectureTestScreen.route());
+    void navigagteToAddLecture({required BuildContext context}) =>
+        Navigator.of(context).push(AddLectureScreen.route());
+    void navigagteToAddTest({required BuildContext context}) =>
+        Navigator.of(context).push(AddTestScreen.route());
     return Scaffold(
-      floatingActionButton: FloatingActionButton(
-          backgroundColor: Colors.white,
-          shape: CircleBorder(),
-          onPressed: () => navigateToCreateLectureTest(context: context),
-          child: Icon(
-            Icons.add,
-            color: Colorss.backgroundFadeBlue,
-          )),
+      floatingActionButton: SpeedDialFabWidget(
+        secondaryIconsList: [
+          Icons.book,
+          Icons.book,
+        ],
+        secondaryIconsText: ["Add Lecture", "Add Test"],
+        secondaryIconsOnPress: [
+          () => navigagteToAddLecture(context: context),
+          () => navigagteToAddTest(context: context),
+        ],
+        primaryIconCollapse: Icons.arrow_back_ios_new_rounded,
+        rotateAngle: 3.14 / 2,
+        primaryIconExpand: Icons.add,
+        primaryElevation: 5,
+        secondaryElevation: 5,
+      ),
+
+      // floatingActionButton: FloatingActionButton(
+      //     backgroundColor: Colors.white,
+      //     shape: CircleBorder(),
+      //     onPressed: () => navigagteToAddLecture(context: context),
+      //     child: Icon(
+      //       Icons.add,
+      //       color: Colorss.backgroundFadeBlue,
+      //     )),
       // bottomNavigationBar: Container(
       //   height: 60.h,
       //   width: 100.w,
@@ -148,13 +169,18 @@ class HomePage extends ConsumerWidget {
                                         itemCount: lectures.length,
                                         itemBuilder: (context, index) {
                                           return ScheduleListItem(
-                                            date: DateFormat('dd - MMMM - yyyy')
-                                                .format(
+                                            date: DateHelper()
+                                                .formatDateTextMonth(
+                                                    date: lectures[index]
+                                                        .startTime),
+                                            // date: DateFormat('dd - MMMM - yyyy')
+                                            //     .format(
+                                            //         lectures[index].startTime),
+                                            startTime: TimeHelper().formatTime(
+                                                time:
                                                     lectures[index].startTime),
-                                            startTime: DateFormat.jm().format(
-                                                lectures[index].startTime),
-                                            endTime: DateFormat.jm().format(
-                                                lectures[index].endTime),
+                                            endTime: TimeHelper().formatTime(
+                                                time: lectures[index].endTime),
                                             subject: lectures[index].subject,
                                             faculty: lectures[index].facultyUID,
                                             std: lectures[index].std.toString(),

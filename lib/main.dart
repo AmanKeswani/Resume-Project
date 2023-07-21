@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:personal_project/features/auth/controllers/auth_controller.dart';
-import 'package:personal_project/features/auth/home/screens/home_screen.dart';
 import 'package:personal_project/features/auth/screens/login.dart';
+import 'package:personal_project/features/home/screens/home_screen.dart';
 
 void main() {
   runApp(ProviderScope(child: const MyApp()));
@@ -19,7 +19,7 @@ class MyApp extends ConsumerWidget {
     return ScreenUtilInit(
       designSize: Size(430, 932),
       builder: (BuildContext context, Widget? child) => MaterialApp(
-        debugShowCheckedModeBanner: false,   
+        debugShowCheckedModeBanner: false,
         title: 'Flutter Demo',
         theme: ThemeData(
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
