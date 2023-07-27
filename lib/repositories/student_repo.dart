@@ -1,34 +1,41 @@
 import 'package:appwrite/appwrite.dart';
+import 'package:appwrite/models.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:personal_project/constants/constants.dart';
 import 'package:personal_project/core/core.dart';
 import 'package:personal_project/models/models.dart';
 
-abstract class IUserRepo {
-  FutureEitherVoid saveStudentData(Student student);
+abstract class IStudentRepo {
+  FutureEither<Document> createStudent({
+    required Student student,
+    required String documentId,
+  });
 }
 
 final studentRepoProvider = Provider((ref) {
   final db = ref.watch(appwriteDatabaseProvider);
-  return UserRepo(db: db);
+  return StudentRepo(db: db);
 });
 
-class UserRepo implements IUserRepo {
+class StudentRepo implements IStudentRepo {
   final Databases _db;
 
-  UserRepo({required Databases db}) : _db = db;
+  StudentRepo({required Databases db}) : _db = db;
 
   @override
-  FutureEitherVoid saveStudentData(Student student) async {
+  FutureEither<Document> createStudent({
+    required Student student,
+    required String documentId,
+  }) async {
     try {
-      await _db.createDocument(
+      final doc = await _db.createDocument(
         databaseId: AppwriteConstants.databaseID,
         collectionId: AppwriteConstants.studentCollectionID,
-        documentId: student.studentId,
+        documentId: documentId,
         data: student.toMap(),
       );
-      return right(null);
+      return right(doc);
     } on AppwriteException catch (e, st) {
       return left(Failure(e.message ?? "some unexpected error", st));
     } catch (e, st) {

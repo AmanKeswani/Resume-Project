@@ -10,12 +10,13 @@ abstract class IAuthRepo {
     required String password,
   });
 
-
   Future<User?> currentUser();
-  // FutureEither<User> signUp({
-  //   required String username,
-  //   required String password,
-  // });
+
+  FutureEither<User> signUp({
+    required String email,
+    required String name,
+    required String password,
+  });
 }
 
 final authRepoProvider = Provider((ref) {
@@ -32,8 +33,8 @@ class AuthRepo implements IAuthRepo {
     required String username,
     required String password,
   }) async {
-
     try {
+      
       final user = await _account.createEmailSession(
           email: username, password: password);
       return right(user);
@@ -59,8 +60,24 @@ class AuthRepo implements IAuthRepo {
     }
   }
 
-  // @override
-  // FutureEither<User> signUp({required String username, required String password}) {
-
-  // }
+  @override
+  FutureEither<User> signUp({
+    required String email,
+    required String name,
+    required String password,
+  }) async {
+    try {
+      final User user = await _account.create(
+        name: name,
+        userId: ID.unique(),
+        email: email,
+        password: password,
+      );
+      return right(user);
+    } on AppwriteException catch (e, st) {
+      return left(Failure(e.message ?? "Unknown Appwrite Exception", st));
+    } catch (e, st) {
+      return left(Failure(e.toString(), st));
+    }
+  }
 }

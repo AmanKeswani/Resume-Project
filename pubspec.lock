@@ -61,10 +61,10 @@ packages:
     dependency: transitive
     description:
       name: cookie_jar
-      sha256: "1024f3a52bee181fc8f10f4a359085471587d7406323090a53a7171bc0aa5c37"
+      sha256: a6ac027d3ed6ed756bfce8f3ff60cb479e266f3b0fdabd6242b804b6765e52de
       url: "https://pub.dev"
     source: hosted
-    version: "4.0.5"
+    version: "4.0.8"
   crypto:
     dependency: transitive
     description:
@@ -81,14 +81,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.17.3"
-  cupertino_icons:
-    dependency: "direct main"
-    description:
-      name: cupertino_icons
-      sha256: e35129dc44c9118cee2a5603506d823bab99c68393879edb440e0090d07586be
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.0.5"
   device_info_plus:
     dependency: transitive
     description:
@@ -150,14 +142,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.3.6"
-  flutter_rounded_date_picker:
-    dependency: "direct main"
-    description:
-      name: flutter_rounded_date_picker
-      sha256: e6aa2dc5d3b44e8bbe85ef901be69eac59ba4136427f11f4c8b2a303e1e774e7
-      url: "https://pub.dev"
-    source: hosted
-    version: "3.0.4"
   flutter_screenutil:
     dependency: "direct main"
     description:
@@ -166,6 +150,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "5.8.4"
+  flutter_speed_dial:
+    dependency: "direct main"
+    description:
+      name: flutter_speed_dial
+      sha256: "698a037274a66dbae8697c265440e6acb6ab6cae9ac5f95c749e7944d8f28d41"
+      url: "https://pub.dev"
+    source: hosted
+    version: "7.0.0"
   flutter_test:
     dependency: "direct dev"
     description: flutter
@@ -196,10 +188,10 @@ packages:
     dependency: "direct main"
     description:
       name: fpdart
-      sha256: "4a0d047c3359a4bdd19e4941603bbe394bd133b3772a38049e17f9534d47106e"
+      sha256: b254aef83353a12e355df6f1231d9b646638bb9493b3f2a2c4800961f7e8bf0b
       url: "https://pub.dev"
     source: hosted
-    version: "0.6.0"
+    version: "1.0.0"
   google_nav_bar:
     dependency: "direct main"
     description:
@@ -364,10 +356,10 @@ packages:
     dependency: transitive
     description:
       name: plugin_platform_interface
-      sha256: "6a2128648c854906c53fa8e33986fc0247a1116122f9534dd20e3ab9e16a32bc"
+      sha256: "43798d895c929056255600343db8f049921cbec94d31ec87f1dc5c16c01935dd"
       url: "https://pub.dev"
     source: hosted
-    version: "2.1.4"
+    version: "2.1.5"
   riverpod:
     dependency: transitive
     description:
@@ -389,14 +381,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.9.1"
-  speed_dial_fab:
-    dependency: "direct main"
-    description:
-      name: speed_dial_fab
-      sha256: "466ab01825a4e8167e44d57674f4efe4a2364b2d01982e3d02dd0210b9107f9b"
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.3.0"
   stack_trace:
     dependency: transitive
     description:
@@ -489,10 +473,10 @@ packages:
     dependency: transitive
     description:
       name: url_launcher_android
-      sha256: "15f5acbf0dce90146a0f5a2c4a002b1814a6303c4c5c075aa2623b2d16156f03"
+      sha256: "78cb6dea3e93148615109e58e42c35d1ffbf5ef66c44add673d0ab75f12ff3af"
       url: "https://pub.dev"
     source: hosted
-    version: "6.0.36"
+    version: "6.0.37"
   url_launcher_ios:
     dependency: transitive
     description:
@@ -561,10 +545,10 @@ packages:
     dependency: transitive
     description:
       name: win32
-      sha256: dfdf0136e0aa7a1b474ea133e67cb0154a0acd2599c4f3ada3b49d38d38793ee
+      sha256: f2add6fa510d3ae152903412227bda57d0d5a8da61d2c39c1fb022c9429a41c0
       url: "https://pub.dev"
     source: hosted
-    version: "5.0.5"
+    version: "5.0.6"
   win32_registry:
     dependency: transitive
     description:

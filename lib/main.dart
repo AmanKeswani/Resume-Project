@@ -25,6 +25,7 @@ class MyApp extends ConsumerWidget {
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
           useMaterial3: true,
         ),
+        // home: const HomePage(),
         home: ref.watch(currentUserAccountProvider).when(
               data: (user) {
                 if (user != null) {

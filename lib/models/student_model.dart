@@ -12,7 +12,6 @@ class Student {
   final String fatherContactNumber;
   final String motherName;
   final String motherContactNumber;
-  final String username;
   final String batch;
   final String std;
   final List<String> subjects;
@@ -26,7 +25,6 @@ class Student {
     required this.fatherContactNumber,
     required this.motherName,
     required this.motherContactNumber,
-    required this.username,
     required this.batch,
     required this.std,
     required this.subjects,
@@ -42,7 +40,6 @@ class Student {
     String? fatherContactNumber,
     String? motherName,
     String? motherContactNumber,
-    String? username,
     String? batch,
     String? std,
     List<String>? subjects,
@@ -57,7 +54,6 @@ class Student {
       fatherContactNumber: fatherContactNumber ?? this.fatherContactNumber,
       motherName: motherName ?? this.motherName,
       motherContactNumber: motherContactNumber ?? this.motherContactNumber,
-      username: username ?? this.username,
       batch: batch ?? this.batch,
       std: std ?? this.std,
       subjects: subjects ?? this.subjects,
@@ -75,7 +71,6 @@ class Student {
     result.addAll({'fatherContactNumber': fatherContactNumber});
     result.addAll({'motherName': motherName});
     result.addAll({'motherContactNumber': motherContactNumber});
-    result.addAll({'username': username});
     result.addAll({'batch': batch});
     result.addAll({'std': std});
     result.addAll({'subjects': subjects});
@@ -94,9 +89,8 @@ class Student {
       fatherContactNumber: map['fatherContactNumber'] ?? '',
       motherName: map['motherName'] ?? '',
       motherContactNumber: map['motherContactNumber'] ?? '',
-      username: map['username'] ?? '',
       batch: map['batch'] ?? '',
-      std: map['std'] ?? '',
+      std: (map['std'] ?? '').toString(),
       subjects: List<String>.from(map['subjects']),
       emailID: map['emailID'] ?? '',
     );
@@ -109,7 +103,7 @@ class Student {
 
   @override
   String toString() {
-    return 'Student(studentId: $studentId, firstName: $firstName, lastName: $lastName, contactNumber: $contactNumber, fatherName: $fatherName, fatherContactNumber: $fatherContactNumber, motherName: $motherName, motherContactNumber: $motherContactNumber, username: $username, batch: $batch, std: $std, subjects: $subjects, emailID: $emailID)';
+    return 'Student(studentId: $studentId, firstName: $firstName, lastName: $lastName, contactNumber: $contactNumber, fatherName: $fatherName, fatherContactNumber: $fatherContactNumber, motherName: $motherName, motherContactNumber: $motherContactNumber, batch: $batch, std: $std, subjects: $subjects, emailID: $emailID)';
   }
 
   @override
@@ -125,7 +119,6 @@ class Student {
         other.fatherContactNumber == fatherContactNumber &&
         other.motherName == motherName &&
         other.motherContactNumber == motherContactNumber &&
-        other.username == username &&
         other.batch == batch &&
         other.std == std &&
         listEquals(other.subjects, subjects) &&
@@ -142,7 +135,6 @@ class Student {
         fatherContactNumber.hashCode ^
         motherName.hashCode ^
         motherContactNumber.hashCode ^
-        username.hashCode ^
         batch.hashCode ^
         std.hashCode ^
         subjects.hashCode ^

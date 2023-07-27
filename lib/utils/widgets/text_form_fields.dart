@@ -15,6 +15,7 @@ class CustomTextFormField extends StatelessWidget {
     required this.controller,
     this.enabled,
     this.suffixIcon,
+    this.prefix,
   });
 
   final TextEditingController controller;
@@ -24,6 +25,7 @@ class CustomTextFormField extends StatelessWidget {
   final int? maxLines;
   final int? verticalPadding;
   final bool? enabled;
+  final Widget? prefix;
   final Widget? suffixIcon;
 
   @override
@@ -35,6 +37,8 @@ class CustomTextFormField extends StatelessWidget {
       controller: controller,
       keyboardType: keyBoardType ?? TextInputType.text,
       decoration: InputDecoration(
+        prefix: prefix,
+        floatingLabelAlignment: FloatingLabelAlignment.center,
         suffixIcon: suffixIcon,
         labelText: labelText,
         labelStyle: TextStyle(

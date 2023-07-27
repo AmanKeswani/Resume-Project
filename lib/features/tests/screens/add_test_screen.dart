@@ -21,11 +21,6 @@ class AddTestScreen extends ConsumerStatefulWidget {
 class _AddTestScreenState extends ConsumerState<AddTestScreen> {
   final TextfieldTagsController _controller = TextfieldTagsController();
 
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-  }
-
   final TextEditingController _subject = TextEditingController();
   final TextEditingController _startTime = TextEditingController();
   final TextEditingController _endTime = TextEditingController();
@@ -146,7 +141,7 @@ class _AddTestScreenState extends ConsumerState<AddTestScreen> {
                       },
                       child: CustomTextFormField(
                         controller: _dateController,
-                        suffixIcon: Icon(Icons.arrow_drop_down_rounded),
+                        suffixIcon: const Icon(Icons.arrow_drop_down_rounded),
                         enabled: false,
                         labelText: "Lecture Date",
                       ),

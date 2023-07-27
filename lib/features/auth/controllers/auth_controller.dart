@@ -22,12 +22,33 @@ class AuthController {
     required AuthRepo authRepo,
   }) : _authRepo = authRepo;
 
+  Future<User?> createAuth({
+    required String email,
+    required String name,
+    required BuildContext context,
+    required String password,
+  }) async {
+    final res = await _authRepo.signUp(
+      email: email,
+      name: name,
+      password: password,
+    );
+    var val = res.fold(
+      (l) {
+        showSnackBar(context, l.message);
+        return null;
+      },
+      (user) => user,
+    );
+    return val;
+  }
+
   void signIn({
     required String username,
     required String password,
     required BuildContext context,
   }) async {
-    username = "$username@example.com";
+    username = username;
     final res = await _authRepo.signIn(username: username, password: password);
     res.fold(
       (l) => showSnackBar(context, l.message),
