@@ -34,7 +34,6 @@ class AuthRepo implements IAuthRepo {
     required String password,
   }) async {
     try {
-      
       final user = await _account.createEmailSession(
           email: username, password: password);
       return right(user);

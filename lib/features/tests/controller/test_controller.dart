@@ -42,4 +42,20 @@ class TestController {
       },
     );
   }
+
+  Future<List<Lecture>> getLectures() async {
+    // final today = DateTime.now();
+    // final todayDate = DateTime(today.year, today.month, today.day);
+
+    final lectureListData = await _testRepo.getAllTests();
+    var lectureList = lectureListData
+        .map((lecture) => Lecture.fromMap(lecture.data))
+        .toList();
+    // List<Lecture> filteredLectureList = lectureList.where((element) {
+    //   final lectureDate = DateTime(element.startTime.year,
+    //       element.startTime.month, element.startTime.day);
+    //   return lectureDate.isAtSameMomentAs(todayDate);
+    // }).toList();
+    return lectureList;
+  }
 }

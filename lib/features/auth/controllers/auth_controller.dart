@@ -52,7 +52,7 @@ class AuthController {
     final res = await _authRepo.signIn(username: username, password: password);
     res.fold(
       (l) => showSnackBar(context, l.message),
-      (r) => Navigator.push(
+      (r) => Navigator.pushReplacement(
         context,
         HomePage.route(),
       ),

@@ -59,7 +59,9 @@ class _HomePageState extends ConsumerState<HomePage> {
   Widget build(BuildContext context) {
     Widget selectedPage;
     if (selected == 0) {
-      selectedPage = HomePageTab();
+      selectedPage = HomePageTab(
+        date: DateTime(2023, 09, 04),
+      );
     } else if (selected == 1) {
       selectedPage = SchedulePageTab();
     } else if (selected == 2) {

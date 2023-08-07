@@ -14,7 +14,9 @@ class AppwriteConstants {
 
   static const projectID = '64b8f32f6e086ff3dca3';
   // static const endPoint = 'http://172.20.10.2:80/v1';
-  static const endPoint = 'http://192.168.208.189:80/v1';
+  // static const endPoint = 'http://192.168.208.189:80/v1';
+  // static const endPoint = 'http://10.0.0.6:80/v1';
+  static const endPoint = 'http://192.168.207.189:80/v1';
   // static const endPoint = 'http://10.5.65.222:80/v1';
   // static const endPoint = 'http://192.168.197.1:80/v1';
   static bool selfSigned = true;

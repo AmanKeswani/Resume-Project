@@ -1,5 +1,0 @@
-Add Lecture and Add Test in Chip format so that one date many add
-Add Drop down for subject and accordingly to standard, faculty and batch for lectures
-create batches
-create notes features
-store all standard, subjects, topics in database

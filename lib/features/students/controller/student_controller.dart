@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:personal_project/features/auth/controllers/auth_controller.dart';
@@ -69,6 +71,16 @@ class StudentController {
         );
         Navigator.of(context).pop();
       });
-    } else {}
+    } else {
+      showDialog(
+        context: context,
+        builder: (BuildContext context) => const CustomAlertDialogBasic(
+          titleText: "Creation Failed",
+          descriptionText:
+              "Failed To create Student Auth, please Try again or try contacting support.",
+        ),
+      );
+      Navigator.of(context).pop();
+    }
   }
 }

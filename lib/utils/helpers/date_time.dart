@@ -3,7 +3,7 @@ import 'package:intl/intl.dart';
 
 class DateHelper {
   String formatDateTextMonth({required DateTime date}) {
-    return DateFormat('dd - MMMM -  yyyy').format(date);
+    return DateFormat('dd  MMMM  yyyy').format(date);
   }
 
   String formatDateNumberMonth({required DateTime date}) {

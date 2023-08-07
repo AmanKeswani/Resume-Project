@@ -13,6 +13,7 @@ final testRepoProvider = Provider((ref) {
 
 abstract class ITestRepo {
   FutureEither<Document> addTest({required Test test});
+  Future<List<Document>> getAllTests();
 }
 
 class TestRepo implements ITestRepo {
@@ -34,5 +35,17 @@ class TestRepo implements ITestRepo {
     } catch (e, st) {
       return left(Failure(e.toString(), st));
     }
+  }
+
+  @override
+  Future<List<Document>> getAllTests() async {
+    final docs = await _db.listDocuments(
+      databaseId: AppwriteConstants.databaseID,
+      collectionId: AppwriteConstants.testCollectionID,
+      queries: [
+        // Query.orderAsc("startTime"),
+      ],
+    );
+    return docs.documents;
   }
 }
