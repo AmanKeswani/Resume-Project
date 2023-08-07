@@ -17,16 +17,24 @@ class Controller {
   Controller({required CommonRepo cr}) : _cr = cr;
 
   Future<List<dynamic>> getSchedule({required DateTime date}) async {
-    final list = await _cr.getFullSchedule(date: date);
-    final returnList = [];
+    final list = await _cr.getFullSchedule();
+    final tempList = [];
 
     for (Document item in list) {
       try {
-        returnList.add(
+        tempList.add(
           Test.fromMap(item.data),
         );
       } catch (_) {
-        returnList.add(Lecture.fromMap(item.data));
+        tempList.add(Lecture.fromMap(item.data));
+      }
+    }
+    final returnList = [];
+    for (dynamic item in tempList) {
+      if (item.startTime.year == date.year &&
+          item.startTime.month == date.month &&
+          item.startTime.day == date.day) {
+        returnList.add(item);
       }
     }
 

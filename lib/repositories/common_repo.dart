@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:personal_project/repositories/repos.dart';
 
 abstract class ICommonRepo {
-  Future<List<Document>> getFullSchedule({required DateTime date});
+  Future<List<Document>> getFullSchedule();
 }
 
 final commonRepoProvider = Provider(
@@ -24,7 +24,7 @@ class CommonRepo implements ICommonRepo {
         _tr = tr;
 
   @override
-  Future<List<Document>> getFullSchedule({required DateTime date}) async {
+  Future<List<Document>> getFullSchedule() async {
     final tests = await _tr.getAllTests();
     final lectures = await _lr.getAllLectures();
 

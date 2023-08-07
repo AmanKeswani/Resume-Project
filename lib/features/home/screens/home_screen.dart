@@ -60,8 +60,12 @@ class _HomePageState extends ConsumerState<HomePage> {
     Widget selectedPage;
     if (selected == 0) {
       selectedPage = HomePageTab(
-        date: DateTime(2023, 09, 04),
-      );
+          // date: DateTime(
+          //   DateTime.now().year,
+          //   DateTime.now().month,
+          //   DateTime.now().day,
+          // ),
+          );
     } else if (selected == 1) {
       selectedPage = SchedulePageTab();
     } else if (selected == 2) {

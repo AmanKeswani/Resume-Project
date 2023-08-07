@@ -4,16 +4,20 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:personal_project/constants/constants.dart';
 import 'package:personal_project/features/home/controllers/controller.dart';
 import 'package:personal_project/features/home/widgets/widgets.dart';
-import 'package:personal_project/utils/helpers/date_time.dart';
+import 'package:personal_project/utils/helpers/helpers.dart';
 import 'package:personal_project/utils/widgets/widgets.dart';
 
-class HomePageTab extends ConsumerWidget {
-  HomePageTab({super.key, required DateTime date});
-
-  final DateTime date = DateTime(2023, 09, 04);
+class HomePageTab extends ConsumerStatefulWidget {
+  const HomePageTab({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<ConsumerStatefulWidget> createState() => _HomePageTabState();
+}
+
+class _HomePageTabState extends ConsumerState<HomePageTab> {
+  @override
+  Widget build(BuildContext context) {
+    final date = ref.watch(chosenDateProvider.notifier);
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
@@ -61,18 +65,32 @@ class HomePageTab extends ConsumerWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       InkWell(
-                          onTap: () {},
+                          onTap: () {
+                            date.state = DateTime(
+                              date.state.year,
+                              date.state.month,
+                              date.state.day - 1,
+                            );
+                            setState(() {});
+                          },
                           child: const Icon(Icons.arrow_back_ios_new_rounded)),
                       CustomText(
-                        text: DateHelper()
-                            .formatDateTextMonth(date: DateTime.now()),
+                        text:
+                            DateHelper().formatDateTextMonth(date: date.state),
                         style: customStyle(
                           size: 25,
                           fontWeight: FontWeight.w400,
                         ),
                       ),
                       InkWell(
-                          onTap: () {},
+                          onTap: () {
+                            date.state = DateTime(
+                              date.state.year,
+                              date.state.month,
+                              date.state.day + 1,
+                            );
+                            setState(() {});
+                          },
                           child: const Icon(Icons.arrow_forward_ios_rounded)),
                     ],
                   ),
@@ -85,8 +103,7 @@ class HomePageTab extends ConsumerWidget {
                       vertical: 10.h,
                     ),
                     // child: ref.watch(scheduleProvider(DateTime.now())).when(
-                    child: ref.watch(scheduleProvider(date)).when(
-
+                    child: ref.watch(scheduleProvider(date.state)).when(
                           data: (lectures) {
                             if (lectures.isEmpty) {
                               return const Center(
@@ -102,7 +119,7 @@ class HomePageTab extends ConsumerWidget {
                             }
                           },
                           error: (error, stackTrace) => Text(error.toString()),
-                          loading: () => Text("Loading"),
+                          loading: () => const Text("Loading"),
                         ),
                   ),
                 )
