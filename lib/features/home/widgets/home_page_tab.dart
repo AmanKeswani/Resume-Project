@@ -1,7 +1,12 @@
+// ignore_for_file: use_build_context_synchronously
+
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:personal_project/constants/constants.dart';
+import 'package:personal_project/core/core.dart';
 import 'package:personal_project/features/home/controllers/controller.dart';
 import 'package:personal_project/features/home/widgets/widgets.dart';
 import 'package:personal_project/utils/helpers/helpers.dart';
@@ -15,6 +20,7 @@ class HomePageTab extends ConsumerStatefulWidget {
 }
 
 class _HomePageTabState extends ConsumerState<HomePageTab> {
+  Map<String, dynamic> data = {"collectionName": "abc"};
   @override
   Widget build(BuildContext context) {
     final date = ref.watch(chosenDateProvider.notifier);
@@ -74,12 +80,31 @@ class _HomePageTabState extends ConsumerState<HomePageTab> {
                             setState(() {});
                           },
                           child: const Icon(Icons.arrow_back_ios_new_rounded)),
-                      CustomText(
-                        text:
-                            DateHelper().formatDateTextMonth(date: date.state),
-                        style: customStyle(
-                          size: 25,
-                          fontWeight: FontWeight.w400,
+                      GestureDetector(
+                        onTap: () async {
+                          final ans = await ref
+                              .watch(appwriteFunctionsProvider)
+                              .createExecution(
+                                functionId:
+                                    AppwriteConstants.createBatchFunctionId,
+                                data: json.encode(data),
+                              );
+                          showDialog(
+                            context: context,
+                            builder: (BuildContext context) =>
+                                CustomAlertDialogBasic(
+                              descriptionText: ans.response,
+                              titleText: ans.$id,
+                            ),
+                          );
+                        },
+                        child: CustomText(
+                          text: DateHelper()
+                              .formatDateTextMonth(date: date.state),
+                          style: customStyle(
+                            size: 25,
+                            fontWeight: FontWeight.w400,
+                          ),
                         ),
                       ),
                       InkWell(

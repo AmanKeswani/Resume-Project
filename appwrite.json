@@ -12,6 +12,38 @@
                 ".packages",
                 ".dart_tool"
             ],
+            "execute": [
+                "any"
+            ],
+            "events": [],
+            "schedule": "",
+            "timeout": 15
+        },
+        {
+            "$id": "64d67930187a3408e036",
+            "name": "create-batch",
+            "runtime": "dart-2.17",
+            "path": "functions/create-batch",
+            "entrypoint": "lib/main.dart",
+            "ignore": [
+                ".packages",
+                ".dart_tool"
+            ],
+            "execute": [],
+            "events": [],
+            "schedule": "",
+            "timeout": 15
+        },
+        {
+            "$id": "64d67964e35917dd9665",
+            "name": "create-ids-database",
+            "runtime": "dart-2.17",
+            "path": "functions/create-ids-database",
+            "entrypoint": "lib/main.dart",
+            "ignore": [
+                ".packages",
+                ".dart_tool"
+            ],
             "execute": [],
             "events": [],
             "schedule": "",

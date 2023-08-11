@@ -1,4 +1,7 @@
+import 'dart:convert';
+
 import 'package:dart_appwrite/dart_appwrite.dart';
+import 'package:dart_appwrite/models.dart';
 
 /*
   'req' variable has:
@@ -16,6 +19,8 @@ import 'package:dart_appwrite/dart_appwrite.dart';
 Future<void> start(final req, final res) async {
   try {
     final client = Client();
+    // Map<String, dynamic> data = json.decode(req.payload);
+    Map data = json.decode(req.payload);
 
     // Uncomment the services you need, delete the ones you don't
     // final account = Account(client);
@@ -39,9 +44,58 @@ Future<void> start(final req, final res) async {
           .setKey(req.variables['APPWRITE_FUNCTION_API_KEY'])
           .setSelfSigned(status: true);
 
-      await database.create(
+      Database batchDatabase = await database.create(
         databaseId: ID.unique(),
         name: "Batches",
+      );
+      Collection stdCollection = await database.createCollection(
+        databaseId: batchDatabase.$id,
+        collectionId: ID.unique(),
+        name: data['collectionName'],
+      );
+      await database.createStringAttribute(
+        databaseId: batchDatabase.$id,
+        collectionId: stdCollection.$id,
+        key: "students",
+        size: 255,
+        xrequired: false,
+        array: true,
+      );
+      await database.createStringAttribute(
+        databaseId: batchDatabase.$id,
+        collectionId: stdCollection.$id,
+        key: "std",
+        size: 255,
+        xrequired: true,
+        // array: true,
+        // xdefault: stdCollection.name,
+      );
+      await database.createStringAttribute(
+        databaseId: batchDatabase.$id,
+        collectionId: stdCollection.$id,
+        key: "batchSymbol",
+        size: 255,
+        xrequired: true,
+        // array: true,
+        // xdefault: stdCollection.name,
+      );
+      await database.createStringAttribute(
+        databaseId: batchDatabase.$id,
+        collectionId: stdCollection.$id,
+        key: "board",
+        size: 255,
+        xrequired: true,
+        // array: true,
+        // xdefault: stdCollection.name,
+      );
+      await database.createStringAttribute(
+        databaseId: batchDatabase.$id,
+        collectionId: stdCollection.$id,
+        key: "batchNo",
+        size: 255,
+        xrequired: true,
+        // array: true,
+        // xdefault: stdCollection.name,
       );
     }
 
