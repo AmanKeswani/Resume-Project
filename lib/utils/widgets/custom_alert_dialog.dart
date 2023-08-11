@@ -56,7 +56,7 @@ class CustomAlertDialogBasic extends StatelessWidget {
                       text: descriptionText,
                     ),
                   ),
-                  child: Icon(Icons.copy),
+                  child: const Icon(Icons.copy),
                 )
               ],
             )

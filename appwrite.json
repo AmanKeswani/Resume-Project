@@ -1,0 +1,21 @@
+{
+    "projectId": "64b8f32f6e086ff3dca3",
+    "projectName": "personal_project",
+    "functions": [
+        {
+            "$id": "64d5d066e4035e32994e",
+            "name": "create-batches-database",
+            "runtime": "dart-2.17",
+            "path": "functions/create-batches-database",
+            "entrypoint": "lib/main.dart",
+            "ignore": [
+                ".packages",
+                ".dart_tool"
+            ],
+            "execute": [],
+            "events": [],
+            "schedule": "",
+            "timeout": 15
+        }
+    ]
+}
