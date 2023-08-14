@@ -7,7 +7,7 @@ class Attendance {
   final String attendanceID;
   final String lectureTestID;
   final List<String> students;
-  final List<String> presenty;
+  final List<bool> presenty;
   const Attendance({
     required this.attendanceID,
     required this.lectureTestID,
@@ -19,7 +19,7 @@ class Attendance {
     String? attendanceID,
     String? lectureTestID,
     List<String>? students,
-    List<String>? presenty,
+    List<bool>? presenty,
   }) {
     return Attendance(
       attendanceID: attendanceID ?? this.attendanceID,
@@ -45,7 +45,7 @@ class Attendance {
       attendanceID: map['attendanceID'] ?? '',
       lectureTestID: map['lectureTestID'] ?? '',
       students: List<String>.from(map['students']),
-      presenty: List<String>.from(map['presenty']),
+      presenty: List<bool>.from(map['presenty']),
     );
   }
 

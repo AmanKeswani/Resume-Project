@@ -1,0 +1,83 @@
+- Core Database
+    - Collection : Students (ID - Document ID)
+        - First Name (String)
+        - Last Name (String)
+        - Contact Number (String)
+        - Father Name (String)
+        - Father Contact Number (String)
+        - Mother Name (String)
+        - Mother Contact Number (String)
+        - Std (int)
+        - BatchId (String)
+        - Subjects (List<String>)
+        - Email ID (String)
+
+    - Collection : Faculties (ID - Document ID)
+        - First Name (String)
+        - Last Name (String)
+        - Contact Number (String)
+        - Email ID (String)
+        - Subjects (List<String>)
+
+    - Collection : Tests (ID - Document ID)
+        - Subject (String)
+        - Topics (List<String>)
+        - Batch (String)
+        - Start Time (int)
+        - End Time (int)
+        - Attendance ID (String) [ Reference to the ID from attendance database document ]
+        - Marks ID (String) [ Reference tto teh ID from marks database document ]
+
+    - Collection : Lectures (Id - Document ID)
+        - Subject (String)
+        - Start Time (int)
+        - End Time (int)
+        - Faculty ID (String)
+        - BatchID (String)
+        - Std (int)
+        - Attendance ID (String) [ Reference to the ID from attendance database document ]
+
+    - Collection : Attendance (Id - Document ID) 
+        - LectureTestID (String) [ Reference to the document ID of the lecture or the Test ]
+        - Students (List<String>)
+        - Presenty (List<Bool>)
+
+    - Collection : Marks (Id - Document ID) 
+        - TestID (String)
+        - Students (List<String>)
+        - Presenty (List<Bool>)
+
+    - Collection : Batches (Id - Document ID)
+        - Students (List<String>)
+        - Board (String)
+        - Std (int)
+        - batchSymbol (String)
+        - BatchCategory (String)
+
+    - Collection : Syllabus (Id - Document ID)
+        - Subjectc (String)
+        - Std (int)
+        - Board (String)
+        - Topics (List<String>)
+
+    - Collection : Notes (Id - Document ID)
+        - Subject (String)
+        - Topics (List<String>)
+        - NotesFileId (List<String>)
+        - PracticeSheetFileId (List<String)
+
+    //Remaining
+
+- Meetings Database
+  - Collection: Meetings
+    - Properties: 
+      - meetingId
+      - host
+      - subject
+      - topic
+      - startTime
+      - endTime
+      - batchIds
+      - recordingId
+      - attendanceIds
+      - ...
