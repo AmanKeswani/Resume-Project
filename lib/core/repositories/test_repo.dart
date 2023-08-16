@@ -4,7 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:personal_project/constants/constants.dart';
 import 'package:personal_project/core/core.dart';
-import 'package:personal_project/models/models.dart';
+import 'package:personal_project/core/models/models.dart';
 
 final testRepoProvider = Provider((ref) {
   final db = ref.watch(appwriteDatabaseProvider);

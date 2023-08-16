@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:personal_project/models/models.dart';
-
-import 'package:personal_project/repositories/repos.dart';
+import 'package:personal_project/core/models/models.dart';
+import 'package:personal_project/core/repositories/repos.dart';
 import 'package:personal_project/utils/widgets/snack_bar.dart';
 
 final getTodayLectures = FutureProvider((ref) {

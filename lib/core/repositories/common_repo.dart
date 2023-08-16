@@ -1,6 +1,6 @@
 import 'package:appwrite/models.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:personal_project/repositories/repos.dart';
+import 'package:personal_project/core/repositories/repos.dart';
 
 abstract class ICommonRepo {
   Future<List<Document>> getFullSchedule();

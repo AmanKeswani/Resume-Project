@@ -1,7 +1,7 @@
 import 'package:appwrite/models.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:personal_project/models/models.dart';
-import 'package:personal_project/repositories/repos.dart';
+import 'package:personal_project/core/models/models.dart';
+import 'package:personal_project/core/repositories/repos.dart';
 
 final scheduleProvider = FutureProvider.family((Ref ref, DateTime date) async {
   final cr = ref.watch(controllerProvider);

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:personal_project/constants/constants.dart';
-import 'package:personal_project/models/lecutre_model.dart';
+import 'package:personal_project/core/models/models.dart';
 import 'package:personal_project/utils/helpers/date_time.dart';
 import 'package:personal_project/utils/widgets/widgets.dart';
 

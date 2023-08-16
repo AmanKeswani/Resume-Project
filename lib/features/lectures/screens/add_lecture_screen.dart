@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:personal_project/features/lectures/controllers/lecture_controller.dart';
+import 'package:personal_project/core/controllers/lecture_controller.dart';
 import 'package:personal_project/utils/helpers/helpers.dart';
 import 'package:personal_project/utils/widgets/widgets.dart';
 

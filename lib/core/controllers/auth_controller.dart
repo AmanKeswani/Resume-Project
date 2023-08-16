@@ -1,8 +1,8 @@
 import 'package:appwrite/models.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:personal_project/core/repositories/repos.dart';
 import 'package:personal_project/features/home/screens/home_screen.dart';
-import 'package:personal_project/repositories/repos.dart';
 import 'package:personal_project/utils/widgets/widgets.dart';
 
 final authControllerProvider = Provider((ref) {
