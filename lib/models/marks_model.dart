@@ -6,7 +6,7 @@ import 'package:flutter/foundation.dart';
 class Marks {
   final String testID;
   final String marksID;
-  final List<String> students;
+final List<String> students;
   final List<double> marks;
   const Marks({
     required this.testID,

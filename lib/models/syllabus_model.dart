@@ -6,7 +6,7 @@ import 'package:flutter/foundation.dart';
 class Syllabus {
   final String syllabusId;
   final String subject;
-  final int std;
+  final String std;
   final String board;
   final List<String> topics;
   const Syllabus({
@@ -20,7 +20,7 @@ class Syllabus {
   Syllabus copyWith({
     String? syllabusId,
     String? subject,
-    int? std,
+    String? std,
     String? board,
     List<String>? topics,
   }) {
@@ -35,12 +35,12 @@ class Syllabus {
 
   Map<String, dynamic> toMap() {
     final result = <String, dynamic>{};
-
+  
     result.addAll({'subject': subject});
     result.addAll({'std': std});
     result.addAll({'board': board});
     result.addAll({'topics': topics});
-
+  
     return result;
   }
 
@@ -48,7 +48,7 @@ class Syllabus {
     return Syllabus(
       syllabusId: map['\$id'] ?? '',
       subject: map['subject'] ?? '',
-      std: map['std']?.toInt() ?? 0,
+      std: map['std'] ?? '',
       board: map['board'] ?? '',
       topics: List<String>.from(map['topics']),
     );
@@ -56,8 +56,7 @@ class Syllabus {
 
   String toJson() => json.encode(toMap());
 
-  factory Syllabus.fromJson(String source) =>
-      Syllabus.fromMap(json.decode(source));
+  factory Syllabus.fromJson(String source) => Syllabus.fromMap(json.decode(source));
 
   @override
   String toString() {
@@ -67,21 +66,21 @@ class Syllabus {
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
-
+  
     return other is Syllabus &&
-        other.syllabusId == syllabusId &&
-        other.subject == subject &&
-        other.std == std &&
-        other.board == board &&
-        listEquals(other.topics, topics);
+      other.syllabusId == syllabusId &&
+      other.subject == subject &&
+      other.std == std &&
+      other.board == board &&
+      listEquals(other.topics, topics);
   }
 
   @override
   int get hashCode {
     return syllabusId.hashCode ^
-        subject.hashCode ^
-        std.hashCode ^
-        board.hashCode ^
-        topics.hashCode;
+      subject.hashCode ^
+      std.hashCode ^
+      board.hashCode ^
+      topics.hashCode;
   }
-}
+  }

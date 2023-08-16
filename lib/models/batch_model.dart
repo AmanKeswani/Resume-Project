@@ -7,7 +7,7 @@ class Batch {
   final String batchId;
   final List<String> students;
   final String board;
-  final int std;
+  final String std;
   final String batchSymbol; //IC10B2
   final String batchCategory; //IC10
   const Batch({
@@ -23,7 +23,7 @@ class Batch {
     String? batchId,
     List<String>? students,
     String? board,
-    int? std,
+    String? std,
     String? batchSymbol,
     String? batchCategory,
   }) {
@@ -54,7 +54,7 @@ class Batch {
       batchId: map['\$id'] ?? '',
       students: List<String>.from(map['students']),
       board: map['board'] ?? '',
-      std: map['std']?.toInt() ?? 0,
+      std: map['std'] ?? '',
       batchSymbol: map['batchSymbol'] ?? '',
       batchCategory: map['batchCategory'] ?? '',
     );

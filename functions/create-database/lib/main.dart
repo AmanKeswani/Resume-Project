@@ -219,12 +219,197 @@ Future<void> start(final req, final res) async {
       key: "endTime",
       xrequired: true);
 
+//////////////////////////////////////////// Lecture Collection //////////////////////////////////////////////
 
+  await database.createStringAttribute(
+      databaseId: coreDatabase.$id,
+      collectionId: lectureCollection.$id,
+      key: "subject",
+      size: 50,
+      xrequired: true);
+  await database.createStringAttribute(
+      databaseId: coreDatabase.$id,
+      collectionId: lectureCollection.$id,
+      key: "facultyUID",
+      size: 50,
+      xrequired: true);
+  await database.createStringAttribute(
+      databaseId: coreDatabase.$id,
+      collectionId: lectureCollection.$id,
+      key: "batch",
+      size: 50,
+      xrequired: true);
+  await database.createStringAttribute(
+      databaseId: coreDatabase.$id,
+      collectionId: lectureCollection.$id,
+      key: "std",
+      size: 50,
+      xrequired: true);
+  await database.createStringAttribute(
+      databaseId: coreDatabase.$id,
+      collectionId: lectureCollection.$id,
+      key: "attendanceID",
+      size: 50,
+      xrequired: true);
+  await database.createIntegerAttribute(
+      databaseId: coreDatabase.$id,
+      collectionId: lectureCollection.$id,
+      key: "startTime",
+      xrequired: true);
+  await database.createIntegerAttribute(
+      databaseId: coreDatabase.$id,
+      collectionId: lectureCollection.$id,
+      key: "endTime",
+      xrequired: true);
 
+//////////////////////////////////////////// Attendance Collection //////////////////////////////////////////////
 
+  await database.createStringAttribute(
+      databaseId: coreDatabase.$id,
+      collectionId: attendanceCollection.$id,
+      key: "lectureTestID",
+      size: 50,
+      xrequired: true);
+  await database.createStringAttribute(
+      databaseId: coreDatabase.$id,
+      collectionId: attendanceCollection.$id,
+      key: "students",
+      size: 50,
+      xrequired: false,
+      array: true);
+  await database.createBooleanAttribute(
+      databaseId: coreDatabase.$id,
+      collectionId: attendanceCollection.$id,
+      key: "presenty",
+      xrequired: false,
+      array: true);
 
+//////////////////////////////////////////// Marks Collection //////////////////////////////////////////////
 
-      
+  await database.createStringAttribute(
+      databaseId: coreDatabase.$id,
+      collectionId: marksCollection.$id,
+      key: "testID",
+      size: 50,
+      xrequired: true);
+  await database.createStringAttribute(
+      databaseId: coreDatabase.$id,
+      collectionId: marksCollection.$id,
+      key: "students",
+      size: 50,
+      xrequired: false,
+      array: true);
+  await database.createIntegerAttribute(
+      databaseId: coreDatabase.$id,
+      collectionId: marksCollection.$id,
+      key: "marks",
+      xrequired: false,
+      array: true);
+
+//////////////////////////////////////////// Batches Collection //////////////////////////////////////////////
+
+  await database.createStringAttribute(
+      databaseId: coreDatabase.$id,
+      collectionId: batchesCollection.$id,
+      key: "students",
+      size: 50,
+      xrequired: false,
+      array: true);
+  await database.createStringAttribute(
+      databaseId: coreDatabase.$id,
+      collectionId: batchesCollection.$id,
+      key: "board",
+      size: 50,
+      xrequired: true);
+  await database.createStringAttribute(
+      databaseId: coreDatabase.$id,
+      collectionId: batchesCollection.$id,
+      key: "std",
+      size: 50,
+      xrequired: true);
+  await database.createStringAttribute(
+      databaseId: coreDatabase.$id,
+      collectionId: batchesCollection.$id,
+      key: "batchSymbol",
+      size: 50,
+      xrequired: true);
+  await database.createStringAttribute(
+      databaseId: coreDatabase.$id,
+      collectionId: batchesCollection.$id,
+      key: "batchCategory",
+      size: 50,
+      xrequired: true);
+
+//////////////////////////////////////////// Syllabus Collection //////////////////////////////////////////////
+
+  await database.createStringAttribute(
+      databaseId: coreDatabase.$id,
+      collectionId: syllabusCollection.$id,
+      key: "subject",
+      size: 50,
+      xrequired: true);
+  await database.createStringAttribute(
+      databaseId: coreDatabase.$id,
+      collectionId: syllabusCollection.$id,
+      key: "std",
+      size: 50,
+      xrequired: true);
+  await database.createStringAttribute(
+      databaseId: coreDatabase.$id,
+      collectionId: syllabusCollection.$id,
+      key: "board",
+      size: 50,
+      xrequired: true);
+  await database.createStringAttribute(
+      databaseId: coreDatabase.$id,
+      collectionId: syllabusCollection.$id,
+      key: "topics",
+      size: 50,
+      xrequired: false,
+      array: true);
+
+//////////////////////////////////////////// Notes Collection //////////////////////////////////////////////
+
+  await database.createStringAttribute(
+      databaseId: coreDatabase.$id,
+      collectionId: notesCollection.$id,
+      key: "subject",
+      size: 50,
+      xrequired: true);
+  await database.createStringAttribute(
+      databaseId: coreDatabase.$id,
+      collectionId: notesCollection.$id,
+      key: "std",
+      size: 50,
+      xrequired: true);
+  await database.createStringAttribute(
+      databaseId: coreDatabase.$id,
+      collectionId: notesCollection.$id,
+      key: "board",
+      size: 50,
+      xrequired: true);
+  await database.createStringAttribute(
+      databaseId: coreDatabase.$id,
+      collectionId: notesCollection.$id,
+      key: "topics",
+      size: 50,
+      xrequired: false,
+      array: true);
+  await database.createStringAttribute(
+      databaseId: coreDatabase.$id,
+      collectionId: notesCollection.$id,
+      key: "notesFileId",
+      size: 50,
+      xrequired: false,
+      array: true);
+  await database.createStringAttribute(
+      databaseId: coreDatabase.$id,
+      collectionId: notesCollection.$id,
+      key: "practiceSheetFileId",
+      size: 50,
+      xrequired: false,
+      array: true);
+
   // if (req.variables['APPWRITE_FUNCTION_ENDPOINT'] == null ||
   //     req.variables['APPWRITE_FUNCTION_API_KEY'] == null) {
   //   print(
