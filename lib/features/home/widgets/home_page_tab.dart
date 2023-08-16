@@ -81,23 +81,7 @@ class _HomePageTabState extends ConsumerState<HomePageTab> {
                           },
                           child: const Icon(Icons.arrow_back_ios_new_rounded)),
                       GestureDetector(
-                        onTap: () async {
-                          final ans = await ref
-                              .watch(appwriteFunctionsProvider)
-                              .createExecution(
-                                functionId:
-                                    AppwriteConstants.createBatchFunctionId,
-                                data: json.encode(data),
-                              );
-                          showDialog(
-                            context: context,
-                            builder: (BuildContext context) =>
-                                CustomAlertDialogBasic(
-                              descriptionText: ans.response,
-                              titleText: ans.$id,
-                            ),
-                          );
-                        },
+                        onTap: () {},
                         child: CustomText(
                           text: DateHelper()
                               .formatDateTextMonth(date: date.state),

@@ -31,7 +31,7 @@ class StudentRepo implements IStudentRepo {
     try {
       final doc = await _db.createDocument(
         databaseId: AppwriteConstants.databaseID,
-        collectionId: AppwriteConstants.studentCollectionID,
+        collectionId: AppwriteConstants.studentsCollectionId,
         documentId: documentId,
         data: student.toMap(),
       );

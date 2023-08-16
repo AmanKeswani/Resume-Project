@@ -26,7 +26,7 @@ class TestRepo implements ITestRepo {
     try {
       final doc = await _db.createDocument(
           databaseId: AppwriteConstants.databaseID,
-          collectionId: AppwriteConstants.testCollectionID,
+          collectionId: AppwriteConstants.testsCollectionId,
           documentId: ID.unique(),
           data: test.toMap());
       return right(doc);
@@ -41,7 +41,7 @@ class TestRepo implements ITestRepo {
   Future<List<Document>> getAllTests({DateTime? date}) async {
     final docs = await _db.listDocuments(
       databaseId: AppwriteConstants.databaseID,
-      collectionId: AppwriteConstants.testCollectionID,
+      collectionId: AppwriteConstants.testsCollectionId,
       queries: [],
     );
     return docs.documents;

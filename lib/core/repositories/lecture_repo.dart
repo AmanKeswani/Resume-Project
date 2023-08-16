@@ -25,7 +25,7 @@ class LectureRepo implements ILectureRepo {
   Future<List<Document>> getAllLectures() async {
     final docs = await _db.listDocuments(
       databaseId: AppwriteConstants.databaseID,
-      collectionId: AppwriteConstants.lectureCollectionID,
+      collectionId: AppwriteConstants.lecturesCollectionId,
       queries: [
         // Query.orderAsc("startTime"),
       ],
@@ -38,7 +38,7 @@ class LectureRepo implements ILectureRepo {
     try {
       final doc = await _db.createDocument(
           databaseId: AppwriteConstants.databaseID,
-          collectionId: AppwriteConstants.lectureCollectionID,
+          collectionId: AppwriteConstants.lecturesCollectionId,
           documentId: ID.unique(),
           data: lecture.toMap());
       return right(doc);
