@@ -40,32 +40,87 @@ Future<void> start(final req, final res) async {
 
   Collection studentCollection = await database.createCollection(
       databaseId: coreDatabase.$id,
+      permissions: [
+        Permission.create('any'),
+        Permission.delete('any'),
+        Permission.read('any'),
+        Permission.update('any'),
+        Permission.write('any')
+      ],
       collectionId: ID.unique(),
       name: "Students");
   Collection facultyCollection = await database.createCollection(
       databaseId: coreDatabase.$id,
+      permissions: [
+        Permission.create('any'),
+        Permission.delete('any'),
+        Permission.read('any'),
+        Permission.update('any'),
+        Permission.write('any')
+      ],
       collectionId: ID.unique(),
       name: "Faculties");
   Collection testCollection = await database.createCollection(
-      databaseId: coreDatabase.$id, collectionId: ID.unique(), name: "Tests");
+      databaseId: coreDatabase.$id,
+      permissions: [
+        Permission.create('any'),
+        Permission.delete('any'),
+        Permission.read('any'),
+        Permission.update('any'),
+        Permission.write('any')
+      ],
+      collectionId: ID.unique(),
+      name: "Tests");
   Collection lectureCollection = await database.createCollection(
       databaseId: coreDatabase.$id,
+      permissions: [
+        Permission.create('any'),
+        Permission.delete('any'),
+        Permission.read('any'),
+        Permission.update('any'),
+        Permission.write('any')
+      ],
       collectionId: ID.unique(),
       name: "Lectures");
   Collection attendanceCollection = await database.createCollection(
+      permissions: [
+        Permission.create('any'),
+        Permission.delete('any'),
+        Permission.read('any'),
+        Permission.update('any'),
+        Permission.write('any')
+      ],
       databaseId: coreDatabase.$id,
       collectionId: ID.unique(),
       name: "Attendance");
-  Collection marksCollection = await database.createCollection(
-      databaseId: coreDatabase.$id, collectionId: ID.unique(), name: "Marks");
-  Collection batchesCollection = await database.createCollection(
-      databaseId: coreDatabase.$id, collectionId: ID.unique(), name: "Batches");
-  Collection syllabusCollection = await database.createCollection(
-      databaseId: coreDatabase.$id,
-      collectionId: ID.unique(),
-      name: "Syllabus");
-  Collection notesCollection = await database.createCollection(
-      databaseId: coreDatabase.$id, collectionId: ID.unique(), name: "Notes");
+  Collection marksCollection = await database.createCollection(permissions: [
+    Permission.create('any'),
+    Permission.delete('any'),
+    Permission.read('any'),
+    Permission.update('any'),
+    Permission.write('any')
+  ], databaseId: coreDatabase.$id, collectionId: ID.unique(), name: "Marks");
+  Collection batchesCollection = await database.createCollection(permissions: [
+    Permission.create('any'),
+    Permission.delete('any'),
+    Permission.read('any'),
+    Permission.update('any'),
+    Permission.write('any')
+  ], databaseId: coreDatabase.$id, collectionId: ID.unique(), name: "Batches");
+  Collection syllabusCollection = await database.createCollection(permissions: [
+    Permission.create('any'),
+    Permission.delete('any'),
+    Permission.read('any'),
+    Permission.update('any'),
+    Permission.write('any')
+  ], databaseId: coreDatabase.$id, collectionId: ID.unique(), name: "Syllabus");
+  Collection notesCollection = await database.createCollection(permissions: [
+    Permission.create('any'),
+    Permission.delete('any'),
+    Permission.read('any'),
+    Permission.update('any'),
+    Permission.write('any')
+  ], databaseId: coreDatabase.$id, collectionId: ID.unique(), name: "Notes");
 
   //////////////////////////////////////////// Student Collection //////////////////////////////////////////////
   await database.createStringAttribute(
@@ -201,13 +256,13 @@ Future<void> start(final req, final res) async {
       collectionId: testCollection.$id,
       key: "attendanceID",
       size: 50,
-      xrequired: true);
+      xrequired: false);
   await database.createStringAttribute(
       databaseId: coreDatabase.$id,
       collectionId: testCollection.$id,
       key: "marksID",
       size: 50,
-      xrequired: true);
+      xrequired: false);
   await database.createIntegerAttribute(
       databaseId: coreDatabase.$id,
       collectionId: testCollection.$id,
@@ -250,7 +305,7 @@ Future<void> start(final req, final res) async {
       collectionId: lectureCollection.$id,
       key: "attendanceID",
       size: 50,
-      xrequired: true);
+      xrequired: false);
   await database.createIntegerAttribute(
       databaseId: coreDatabase.$id,
       collectionId: lectureCollection.$id,

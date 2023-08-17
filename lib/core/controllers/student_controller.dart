@@ -62,6 +62,8 @@ class StudentController {
         documentId: user.$id,
       );
       res.fold((l) => showSnackBar(context, l.message), (r) {
+        print('reached');
+        print('$emailID $password');
         showDialog(
           context: context,
           builder: (BuildContext context) => CustomAlertDialogBasic(
@@ -69,7 +71,7 @@ class StudentController {
             descriptionText: "Username : $emailID\nPassword : $password",
           ),
         );
-        Navigator.of(context).pop();
+        // Navigator.of(context).pop();
       });
     } else {
       showDialog(
