@@ -15,5 +15,7 @@ class AppwriteConstants {
   static const facultyCollectionId = '64ddd7d5eae4f0dd6c07';
   static const studentsCollectionId = '64ddd7d5dcd84fc555ad';
 
+  static const notesBucketId = '64df126e59b04168e746';
+
   const AppwriteConstants._();
 }
