@@ -33,34 +33,29 @@ abstract class INotesRepo {
 }
 
 final notesRepoProvider = Provider((ref) {
-  final storage = ref.watch(appwriteStorageProvider);
   final db = ref.watch(appwriteDatabaseProvider);
-  return NotesRepo(db: db, storage: storage);
+  return NotesRepo(db: db);
 });
 
 class NotesRepo implements INotesRepo {
   final Databases _db;
-  final Storage _storage;
 
   const NotesRepo({
     required Databases db,
-    required Storage storage,
-  })  : _db = db,
-        _storage = storage;
+  }) : _db = db;
 
   @override
   FutureEither<Document> createNote({
     required Notes notes,
   }) async {
     try {
-      
-
       final doc = await _db.createDocument(
         databaseId: AppwriteConstants.databaseID,
         collectionId: AppwriteConstants.notesCollectionId,
         documentId: ID.unique(),
         data: notes.toMap(),
       );
+      return right(doc);
     } on AppwriteException catch (e, st) {
       return left(Failure(e.message ?? "Some Unexpected Error", st));
     } catch (e, st) {

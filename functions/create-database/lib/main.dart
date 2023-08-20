@@ -24,9 +24,11 @@ Future<void> start(final req, final res) async {
   // final functions = Functions(client);
   // final health = Health(client);
   // final locale = Locale(client);
-  // final storage = Storage(client);
+  final storage = Storage(client);
   // final teams = Teams(client);
   // final users = Users(client);
+
+  // ksakgzhtvnxtzuqf
 
   client
       .setEndpoint('http://192.168.251.189:80/v1')
@@ -35,7 +37,21 @@ Future<void> start(final req, final res) async {
           '374d5900f2399ea3c290c1128b65bdd31ff42ec01f2312af2f30da6466698bfff9ba2b2c28d1942b9ebd2c57c4664cfb46bcbda435b81370b015fc84b2019da3e943ff3958bc886edc48dfced176554eace1ee1ffb84109bc7bb6bd16e57bd2800726628fe148eb4260bc5192483d689125fa4b0c73d97e4d7163fa4825debab')
       .setSelfSigned(status: true);
 
-  Database coreDatabase =
+  await storage.createBucket(
+    bucketId: ID.unique(),
+    name: "notesBucket",
+    maximumFileSize: 1073741824,
+    permissions: [
+      Permission.create('any'),
+      Permission.delete('any'),
+      Permission.read('any'),
+      Permission.update('any'),
+      Permission.write('any'),
+    ],
+    allowedFileExtensions: [],
+  );
+
+  Database coreDatabase = 
       await database.create(databaseId: ID.unique(), name: "Core Database");
 
   Collection studentCollection = await database.createCollection(

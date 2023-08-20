@@ -17,5 +17,10 @@ class AppwriteConstants {
 
   static const notesBucketId = '64df126e59b04168e746';
 
+  static String notesBucketImageUrl(String imageId) =>
+      '$endPoint/storage/buckets/$notesBucketId/files/$imageId/view?project=$projectID&mode=admin';
+
+  // static const gbInBytes = 1073741824;
+
   const AppwriteConstants._();
 }

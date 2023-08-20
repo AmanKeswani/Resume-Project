@@ -7,7 +7,7 @@ export './attendance_repo.dart';
 export './faculty_repo.dart';
 export './marks_repo.dart';
 export './batch_repo.dart';
+export './storage_repo.dart';
+export './notes_repo.dart';
+export './syllabus_repo.dart';
 
-
-// notes
-// syllabus
