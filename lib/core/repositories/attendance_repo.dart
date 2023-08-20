@@ -15,6 +15,10 @@ abstract class IAttendanceRepo {
     required String documentId,
     required Attendance attendance,
   });
+
+  // FutureEither<Document> getAttendanceById({
+  //   required String documentId,
+  // });
 }
 
 final attendanceRepoProvider =
@@ -65,4 +69,12 @@ class AttendanceRepo implements IAttendanceRepo {
       return left(Failure(e.toString(), st));
     }
   }
+
+  // @override
+  // FutureEither<Document> getAttendanceById({
+  //   required String documentId,
+  // }) {
+  //   // TODO: implement getAttendanceById
+  //   throw UnimplementedError();
+  // }
 }

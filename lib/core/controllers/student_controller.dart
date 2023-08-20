@@ -17,8 +17,10 @@ class StudentController {
   final StudentRepo _sr;
   final AuthController _auth;
 
-  StudentController({required StudentRepo sr, required AuthController auth})
-      : _sr = sr,
+  StudentController({
+    required StudentRepo sr,
+    required AuthController auth,
+  })  : _sr = sr,
         _auth = auth;
 
   void createStudent({
