@@ -11,13 +11,13 @@ abstract class IFacultyRepo {
     required Faculty faculty,
   });
 
-  FutureEither<Document> getFacultyById({
+  Future<Document> getFacultyById({
     required String documentId,
   });
 
-  Future<List<Document>> getFacultyByName({
-    required String name,
-  });
+  // Future<List<Document>> getFacultyByName({
+  //   required String name,
+  // });
 }
 
 final facultyRepoProvider =
@@ -48,35 +48,29 @@ class FacultyRepo implements IFacultyRepo {
   }
 
   @override
-  FutureEither<Document> getFacultyById({
+  Future<Document> getFacultyById({
     required String documentId,
   }) async {
-    try {
-      final doc = await _db.getDocument(
-        databaseId: AppwriteConstants.databaseID,
-        collectionId: AppwriteConstants.facultyCollectionId,
-        documentId: documentId,
-      );
-      return right(doc);
-    } on AppwriteException catch (e, st) {
-      return left(Failure(e.message ?? "some unexpected error", st));
-    } catch (e, st) {
-      return left(Failure(e.toString(), st));
-    }
+    final doc = await _db.getDocument(
+      databaseId: AppwriteConstants.databaseID,
+      collectionId: AppwriteConstants.facultyCollectionId,
+      documentId: documentId,
+    );
+    return doc;
   }
 
-  @override
-  Future<List<Document>> getFacultyByName({
-    required String name,
-  }) async {
-    final docs = await _db.listDocuments(
-      collectionId: AppwriteConstants.facultyCollectionId,
-      databaseId: AppwriteConstants.databaseID,
-      queries: [
-        Query.search('firstName', name),
-        Query.search('lastName', name),
-      ],
-    );
-    return docs.documents;
-  }
+  // @override
+  // Future<List<Document>> getFacultyByName({
+  //   required String name,
+  // }) async {
+  //   final docs = await _db.listDocuments(
+  //     collectionId: AppwriteConstants.facultyCollectionId,
+  //     databaseId: AppwriteConstants.databaseID,
+  //     queries: [
+  //       Query.search('firstName', name),
+  //       Query.search('lastName', name),
+  //     ],
+  //   );
+  //   return docs.documents;
+  // }
 }
