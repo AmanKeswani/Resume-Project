@@ -11,7 +11,7 @@ abstract class IMarksRepo {
     required Marks marks,
   });
 
-  FutureEither<bool> editMarks({
+  FutureEitherVoid editMarks({
     required String documentId,
     required Marks marks,
   });
@@ -46,7 +46,7 @@ class MarksRepo implements IMarksRepo {
   }
 
   @override
-  FutureEither<bool> editMarks({
+  FutureEitherVoid editMarks({
     required String documentId,
     required Marks marks,
   }) async {
@@ -58,7 +58,7 @@ class MarksRepo implements IMarksRepo {
         data: marks.toMap(),
       );
 
-      return right(true);
+      return right(null);
     } on AppwriteException catch (e, st) {
       return left(Failure(e.message ?? "Some unexpected Error", st));
     } catch (e, st) {

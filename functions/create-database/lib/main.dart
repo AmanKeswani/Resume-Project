@@ -51,6 +51,20 @@ Future<void> start(final req, final res) async {
     allowedFileExtensions: [],
   );
 
+  await storage.createBucket(
+    bucketId: ID.unique(),
+    name: "practiceSheetBucket",
+    maximumFileSize: 1073741824,
+    permissions: [
+      Permission.create('any'),
+      Permission.delete('any'),
+      Permission.read('any'),
+      Permission.update('any'),
+      Permission.write('any'),
+    ],
+    allowedFileExtensions: [],
+  );
+
   Database coreDatabase = 
       await database.create(databaseId: ID.unique(), name: "Core Database");
 

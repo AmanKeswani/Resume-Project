@@ -8,9 +8,9 @@ class Notes {
   final String subject;
   final String std;
   final String board;
-  final List<String> topics;
-  final List<String> notesFileId;
-  final List<String> practiceSheetFileId;
+  final List<String>? topics;
+  final List<String>? notesFileId;
+  final List<String>? practiceSheetFileId;
   const Notes({
     required this.notesId,
     required this.subject,

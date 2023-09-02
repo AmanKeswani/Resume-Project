@@ -11,18 +11,18 @@ abstract class INotesRepo {
     required Notes notes,
   });
 
-  FutureEither<bool> deleteNotes({
-    required Notes notes,
+  FutureEitherVoid deleteNotes({
+    required String notesId,
   });
 
   Future<List<Document>> getAllNotes();
 
-  FutureEither<bool> editNote({
+  FutureEitherVoid editNote({
     required String documentId,
     required Notes note,
   });
 
-  Future<List<Document>> getNotesById({
+  Future<Document> getNotesById({
     required String documentId,
   });
 
@@ -64,42 +64,87 @@ class NotesRepo implements INotesRepo {
   }
 
   @override
-  FutureEither<bool> deleteNotes({
-    required Notes notes,
-  }) {
-    // TODO: implement deleteNotes
-    throw UnimplementedError();
+  FutureEitherVoid deleteNotes({
+    required String notesId,
+  }) async {
+    try {
+      await _db.deleteDocument(
+        databaseId: AppwriteConstants.databaseID,
+        collectionId: AppwriteConstants.notesCollectionId,
+        documentId: notesId,
+      );
+      return right(null);
+    } on AppwriteException catch (e, st) {
+      return left(Failure(e.message ?? "Unknown Appwrite Exception", st));
+    } catch (e, st) {
+      return left(Failure(e.toString(), st));
+    }
   }
 
   @override
-  FutureEither<bool> editNote({
+  FutureEitherVoid editNote({
     required String documentId,
     required Notes note,
-  }) {
-    // TODO: implement editNote
-    throw UnimplementedError();
+  }) async {
+    try {
+      await _db.updateDocument(
+        databaseId: AppwriteConstants.databaseID,
+        collectionId: AppwriteConstants.notesCollectionId,
+        documentId: documentId,
+      );
+      return right(null);
+    } on AppwriteException catch (e, st) {
+      return left(Failure(e.message ?? "Unknown Appwrite Exception", st));
+    } catch (e, st) {
+      return left(Failure(e.toString(), st));
+    }
   }
 
   @override
-  Future<List<Document>> getAllNotes() {
-    // TODO: implement getAllNotes
-    throw UnimplementedError();
+  Future<List<Document>> getAllNotes() async {
+    final docs = await _db.listDocuments(
+        databaseId: AppwriteConstants.databaseID,
+        collectionId: AppwriteConstants.notesCollectionId);
+
+    return docs.documents;
   }
 
   @override
-  Future<List<Document>> getNotesById({
+  Future<Document> getNotesById({
     required String documentId,
-  }) {
-    // TODO: implement getNotesById
-    throw UnimplementedError();
-  }
+  }) async =>
+      await _db.getDocument(
+        databaseId: AppwriteConstants.databaseID,
+        collectionId: AppwriteConstants.notesCollectionId,
+        documentId: documentId,
+      );
 
   @override
   Future<List<Document>> getNotesByStdAndSubject({
     String? std,
     String? subject,
-  }) {
-    // TODO: implement getNotesByStdAndSubject
-    throw UnimplementedError();
+  }) async {
+    if (std == null && subject == null) return getAllNotes();
+    if (std != null && subject == null) {
+      return (await _db.listDocuments(
+              databaseId: AppwriteConstants.databaseID,
+              collectionId: AppwriteConstants.notesCollectionId,
+              queries: [Query.equal('std', std)]))
+          .documents;
+    }
+    if (subject != null && std == null) {
+      return (await _db.listDocuments(
+              databaseId: AppwriteConstants.databaseID,
+              collectionId: AppwriteConstants.notesCollectionId))
+          .documents;
+    }
+    return (await _db.listDocuments(
+            databaseId: AppwriteConstants.databaseID,
+            collectionId: AppwriteConstants.notesCollectionId,
+            queries: [
+          Query.equal('std', std),
+          Query.equal('subject', subject),
+        ]))
+        .documents;
   }
 }

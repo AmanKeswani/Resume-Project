@@ -7,7 +7,7 @@ export './attendance_controller.dart';
 export './batch_controller.dart';
 
 export './faculty_controller.dart';
-// export './marks_controller.dart';
-// export './notes_controller.dart';
+export './marks_controller.dart';
+export './notes_controller.dart';
 // export './storage_controller.dart';
 // export './syallbus_controller.dart';

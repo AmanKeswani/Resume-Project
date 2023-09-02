@@ -34,5 +34,17 @@ class MarksController {
 
   void editMarks({
     required BuildContext context,
-  }) async {}
+    required String documentId,
+    required Marks marks,
+  }) async {
+    final res = await _repo.editMarks(
+      documentId: documentId,
+      marks: marks,
+    );
+
+    res.fold(
+      (l) => showSnackBar(context, l.message),
+      (r) => null,
+    );
+  }
 }
